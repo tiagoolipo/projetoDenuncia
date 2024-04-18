@@ -1,0 +1,31 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: projeto-denuncia
+
+  jackson:
+    date-format: dd/MM/yyyy
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/denuncia?createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Tiago
+
+  jpa:
+      database: mysql
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+app:
+  config:
+    jwt:
+      expiration: 60000000
+    secrets:
+      api-secret: ${API_SECRET:YXV0aC1hcGktc2VjcmV0LWRldi0xMjM0NTY=DHUASU12H3HOPA=sada2hih213hAhAS2IHahiHU2UHuihashuHU2U1HIUhhashas812378HH231U2I}
