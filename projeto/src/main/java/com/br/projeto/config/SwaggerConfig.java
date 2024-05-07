@@ -28,8 +28,8 @@ public class SwaggerConfig {
         prodServer.setDescription("Server URL in Production environment");
 
         Contact contact = new Contact();
-        contact.setEmail("gustavoolipoo@gmail.com");
-        contact.setName("Gustavo");
+        contact.setEmail("tiagoolipo@gmail.com");
+        contact.setName("Tiago");
 
         License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 

@@ -80,7 +80,7 @@ public class ReportServiceImpl implements ReportService {
         }
 
         report.setResponse(reportUpdateRequestDTO.getResponse());
-        report.setStatus("Analisado");
+        report.setStatus("Respondido");
         report.setManager(user);
         return updateReport(report);
     }

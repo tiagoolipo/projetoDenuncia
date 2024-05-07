@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -16,4 +17,5 @@ public class ReportRequestDTO implements Serializable {
 
     private String description;
     private LocalDate dateOfOccurrence;
+    private String office;
 }

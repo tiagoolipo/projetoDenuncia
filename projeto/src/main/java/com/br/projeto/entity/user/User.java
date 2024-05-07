@@ -24,6 +24,7 @@ public class User {
     private Long userId;
     private String firstName;
     private String lastName;
+    private String office;
     private String email;
     private String password;
     @CreationTimestamp
@@ -40,4 +41,7 @@ public class User {
                     name = "role_id"))
     private Set<Role> roles;
 
+    public Object getUsername() {
+        return null;
+    }
 }

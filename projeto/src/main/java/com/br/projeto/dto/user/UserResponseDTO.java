@@ -19,6 +19,8 @@ public class UserResponseDTO implements Serializable {
 
     private String lastName;
 
+    private String office;
+
     private String email;
 
     private LocalDateTime createdAt;

@@ -1,0 +1,35 @@
+body, html {
+  background-image: url(/img/denuncia.png);
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-position: top left;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 24px;
+  border: solid;
+  border-radius:5px 20px 5px 20px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
