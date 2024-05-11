@@ -1,15 +1,16 @@
 /* Start Login */
 body {
-    background-image: url(/img/denuncia2.png);
-    background-repeat: no-repeat;
-    background-size: 300px;
-    background-position: top left;
+    background-image: url(/img/dnc.jpg);
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100%; 
+    background-position: top left; 
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     height: 100vh;
     margin: 0;
 }
+
 
 form {
     width: 400px;
@@ -17,6 +18,8 @@ form {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    margin-left: 40%;
+    margin-top: -4%;
 }
 
 input[type="text"],
