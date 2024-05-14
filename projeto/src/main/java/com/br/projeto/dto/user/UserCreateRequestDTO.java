@@ -23,6 +23,9 @@ public class UserCreateRequestDTO implements Serializable {
     @NotEmpty(message = "{required.last.name}")
     private String lastName;
 
+    @NotEmpty(message = "{required.last.name}")
+    private String office;
+
     @NotEmpty(message = "{required.email}")
     @Email(message = "{required.type.email}")
     private String email;

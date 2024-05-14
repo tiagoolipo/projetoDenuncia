@@ -1,45 +1,66 @@
 $(document).ready(function() {
-    var dadosDoBancoDeDados = [
-        { protocolo: "123974", status: "Pendente", denuncia: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec blandit est. Cras semper, eros consequat semper imperdiet, mauris est porttitor dui, sed egestas libero augue in mi. Integer fermentum fermentum mauris.", dataDenuncia: "10/10/2010", dataOcorrencia: "09/10/2010"},
-        { protocolo: "128734", status: "Respondida", denuncia: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec blandit est. Cras semper, eros consequat semper imperdiet, mauris est porttitor dui, sed egestas libero augue in mi. Integer fermentum fermentum mauris.", dataDenuncia: "11/10/2010", dataOcorrencia: "11/10/2010", resposta: "teste" }
-    ];
-
+    function getSessionToken() {
+        return localStorage.getItem('sessionToken');
+    }
+    var sessionToken = getSessionToken();
+    if (sessionToken) {
+        console.log('Token de sessão recuperado:', sessionToken);
+        $.ajax({
+            url: 'http://localhost:8081/api/v1/reports',
+            type: 'GET',
+            headers: {
+                'Authorization': sessionToken
+            },
+            success: function(data) {
+                console.log('Resposta da requisição:', data);
+                exibirDenuncias(data);
+            },
+            error: function(err) {
+                console.error('Erro na requisição:', err);
+            }
+        });
+    } else {
+        console.log('Token de sessão não encontrado.');
+    }
     function criarLinhasTabela(dados) {
         var linhas = "";
-        dados.forEach(function(item) {
-            linhas += `<li class="table-row">
-                            <div class="col col-1" data-label="Nº de Protocolo">${item.protocolo}</div>
-                            <div class="col col-2" data-label="Status">${item.status}</div>
-                            <div class="col col-3" data-label="Denúncia">${item.denuncia}</div>
-                            <div class="col col-4" data-label="Data da Denúncia">${item.dataDenuncia}</div>
-                            <div class="col col-5" data-label="Data do Ocorrido">${item.dataOcorrencia}</div>
-                            <div class="col col-6" data-label="Editar">
-                                ${(item.status === "Respondida") ? `<textarea class="resposta-textarea" readonly>${item.resposta}</textarea>` : `<button class="botao-visualizacao"></button>
-                                    <div class="responder-form" style="display: none;">
-                                        <textarea class="resposta-textarea" placeholder="Digite sua resposta"></textarea>
-                                        <button class="btn-enviar-resposta">Enviar</button>
-                                    </div>`}
-                            </div>
-                        </li>`;
-        });
+        if (Array.isArray(dados)) {
+            dados.forEach(function(item) {
+                linhas += `<li class="table-row">
+                        <div class="col col-1" data-label="Nº de Protocolo">${item.protocolNumber}</div>
+                        <div class="col col-2" data-label="Função">${item.office}</div>
+                        <div class="col col-3" data-label="Denúncia">${item.description}</div>
+                        <div class="col col-4" data-label="Data da Denúncia">${item.createdAt}</div>
+                        <div class="col col-5" data-label="Data da Ocorrência">${item.dateOfOccurrence}</div>
+                        <div class="col col-6" data-label="Editar">
+                            ${(item.status === "Respondido") ? `<textarea class="resposta-textarea" readonly>${item.response}</textarea>` : `<button class="botao-visualizacao">Visualizar</button>
+                                <div class="responder-form" style="display: none;">
+                                    <textarea class="resposta-textarea" placeholder="Digite sua resposta"></textarea>
+                                    <button class="btn-enviar-resposta">Enviar</button>
+                                </div>`}
+                        </div>
+                    </li>`;
+            });
+        } else {
+            console.error('Os dados recebidos não são um array:', dados);
+        }
         return linhas;
     }
-
-    $('#table-container').append(criarLinhasTabela(dadosDoBancoDeDados));
-
-    //botão de resposta
-    $('.botao-visualizacao').click(function() {
-        // Oculta botão
+    function exibirDenuncias(dados) {
+        if (dados && dados.content && Array.isArray(dados.content)) {
+            var linhas = criarLinhasTabela(dados.content);
+            $('#table-container').append(linhas);
+        } else {
+            console.error('Dados inválidos recebidos:', dados);
+        }
+    }
+    $('#table-container').on('click', '.botao-visualizacao', function() {
         $(this).hide();
-        // abre o texto e o botão de enviar
         $(this).siblings('.responder-form').toggle();
     });
-
-    //botão de enviar resposta
-    $('.enviar-resposta').click(function() {
-        // enviar resposta ao bd
+    $('#table-container').on('click', '.btn-enviar-resposta', function() {
         var resposta = $(this).siblings('.resposta-textarea').val();
-        
-        console.log("Edição Realizada com Sucesso");
+        var protocolNumber = $(this).closest('.table-row').find('.col-1').text();
+        console.log("Resposta enviada ao banco de dados para a denúncia " + protocolNumber + ": ", resposta);
     });
 });

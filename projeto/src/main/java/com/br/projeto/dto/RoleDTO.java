@@ -16,4 +16,5 @@ public class RoleDTO implements Serializable {
 
     private Long id;
     private String roleName;
+    private String office;
 }

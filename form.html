@@ -3,6 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<form id="formulario">
+    <div class="checkbox-list">
+        <label><input type="checkbox" id="anonimoCheckbox"> Não desejo me identificar</label>
+    </div>
+    <label for="dateOfOccurrence">Data da ocorrência:</label>
+    <input type="date" id="dateOfOccurrence" name="dateOfOccurrence">
+    <div class="checkbox-list">
+        <!--<label><input type="checkbox" id="anonimoCheckbox"> Não desejo me identificar</label>-->
+    </div>
+    <label for="description">Descrição:</label>
+    <textarea id="description" name="description" rows="4" required></textarea>
+    <button type="submit">Enviar</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="formulario.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="img/mega.ico" type="image/x-icon">
 <title>Formulário</title>
 <link rel="stylesheet" href="styles.css">
