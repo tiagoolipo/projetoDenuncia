@@ -57,3 +57,30 @@ body {
         width: 90%;
     }
 }
+
+/* Responsividade body */
+
+@media (max-width:1366px) {
+    .body {
+            display: none;
+    }
+}
+
+@media (max-width:1024px) {
+    .body {
+            display: none;
+    }
+}
+
+@media (max-width:768px) {
+    .body {
+            display: none;
+    }
+}
+
+@media (max-width:480px) {
+    .body {
+            display: block;
+    }
+}
+/*** Responsividade body End***/
