@@ -1,19 +1,18 @@
+
 body {
-    background-image: url(/img/denuncia2.png);
-    background-repeat: no-repeat;
-    background-size: 300px;
-    background-position: top left;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+    background-image: url("img/dnc.jpg");
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100%; 
+    background-position: top left; 
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
 .login-container {
+    margin-left: 40%;
     background-color: #fff;
     padding: 40px;
     border-radius: 8px;
@@ -53,4 +52,18 @@ body {
 
 .login-form button:hover {
     background-color: #0056b3;
+}
+
+.cadastro {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: blue;
+    transition: color 0.3s, font-size 0.3s;
+    margin-top: 5%;
+}
+
+.cadastro:hover {
+    color: navy;
+    font-size: 18px; /* Cresce 1px ao passar o mouse */
 }
