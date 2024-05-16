@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="styles.listagem.css">
 </head>
 <body>
+  <div class="top-bar">
+    <button onclick="voltar()" class="btn-voltar">Voltar</button>
+    <button onclick="logoff()" class="btn-logoff">Sair</button>
+  </div>
   <div class="container">
     <h2>Listagem de denúncias</h2>
     <ul class="responsive-table" id="table-container">
@@ -24,5 +28,15 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="listagem2.js"></script>
+<script>
+  function voltar() {
+      window.history.back();
+  }
+
+  function logoff() {
+      // Aqui você pode adicionar o código para "deslogar" o usuário
+      window.location.href = 'login.html'; 
+  }
+</script>
 </body>
 </html>

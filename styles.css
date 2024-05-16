@@ -59,6 +59,26 @@ button {
     cursor: pointer;
 }
 
+.top-bar {
+    padding: 10px;
+    text-align: right;
+}
+
+.btn-voltar, .btn-logoff {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-voltar:hover, .btn-logoff:hover {
+    background-color: #45a049;
+}
+
 button:hover {
     background-color: #00008B;
 }
