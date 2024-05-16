@@ -18,15 +18,19 @@ $(document).ready(function() {
             success: function(data) {
                 setSessionToken(data.jwt);
                 console.log('Token de autenticação obtido com sucesso.');
-                window.location.href = 'pagina-usuario.html';
+                if (username === 'admin' && password === 'admin123') {
+                    window.location.href = 'minhas-denuncias.html';
+                } else {
+                    window.location.href = 'pagina-usuario.html';
+                }
             },
             error: function(err) {
                 console.error(err);
             }
         });
     });
+
     function setSessionToken(token) {
         localStorage.setItem('sessionToken', token);
     }
 });
-
