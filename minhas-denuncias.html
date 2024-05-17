@@ -29,56 +29,86 @@
 
   <nav aria-label="...">
     <ul class="pagination justify-content-center">
-      <li id="previousPage" class="page-item disabled">
-        <a class="page-link" onclick="ativar(this)" href="#" tabindex="-1">Anterior</a>
-      </li>
-      <li id="page1" class="page-item active" onclick="ativar(this)"><a class="page-link" href="#">1</a></li>
-      <li id="page2" class="page-item">
-        <a class="page-link" onclick="ativar(this)" href="#">2 <span class="sr-only"></span></a>
-      </li>
-      <li id="page3" class="page-item" onclick="ativar(this)"><a class="page-link" href="#">3</a></li>
-      <li id="nextPage" class="page-item">
-        <a class="page-link" onclick="ativar(this)" href="#">Próximo</a>
-      </li>
+        <!-- A paginação será preenchida dinamicamente -->
     </ul>
-  </nav>
+</nav>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-  <script>
-    const ativar=(elemento)=>{
-    let itens=document.getElementsByClassName("page-item");
-    let link=document.getElementsByClassName("page-link");
-    for(i=0;i<itens.length;i++){
-            itens[i].classList.remove("active");
-            link[i].classList.remove("active");
-    }
-    elemento.classList.add("active");
-    }
-  </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="lista-denuncias.js"></script>
 
 <script>
+  const itemsPerPage = 5; // Número de itens por página
+  let currentPage = 1;
+
+  function displayPage(page) {
+      currentPage = page;
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const pageItems = denuncias.slice(start, end);
+
+      const tableContainer = document.getElementById("table-container");
+      tableContainer.innerHTML = `
+          <li class="table-header">
+              <div class="col col-1">Nome</div>
+              <div class="col col-2">Nº de Protocolo</div>
+              <div class="col col-3">Denúncia</div>
+              <div class="col col-4">Data da Denúncia</div>
+              <div class="col col-5">Data da Ocorrência</div>
+              <div class="col col-6"></div>
+          </li>`;
+
+      pageItems.forEach(item => {
+          tableContainer.innerHTML += `
+              <li class="table-row">
+                  <div class="col col-1">${item.nome}</div>
+                  <div class="col col-2">${item.protocolo}</div>
+                  <div class="col col-3">${item.denuncia}</div>
+                  <div class="col col-4">${item.dataDenuncia}</div>
+                  <div class="col col-5">${item.dataOcorrencia}</div>
+                  <div class="col col-6"></div>
+              </li>`;
+      });
+
+      updatePagination();
+  }
+
+  function updatePagination() {
+      const totalPages = Math.ceil(denuncias.length / itemsPerPage);
+      const paginationContainer = document.querySelector(".pagination");
+      paginationContainer.innerHTML = `
+          <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+              <a class="page-link" href="#" tabindex="-1" onclick="displayPage(${currentPage - 1})">Anterior</a>
+          </li>`;
+
+      for (let i = 1; i <= totalPages; i++) {
+          paginationContainer.innerHTML += `
+              <li class="page-item ${currentPage === i ? 'active' : ''}" onclick="displayPage(${i})">
+                  <a class="page-link" href="#">${i}</a>
+              </li>`;
+      }
+
+      paginationContainer.innerHTML += `
+          <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+              <a class="page-link" href="#" onclick="displayPage(${currentPage + 1})">Próximo</a>
+          </li>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+      if (!localStorage.getItem('sessionToken')) {
+          window.location.href = 'login.html';
+      } else {
+          displayPage(1);
+      }
+  });
+
+  function logoff() {
+      localStorage.removeItem('sessionToken');
+      window.location.href = 'login.html';
+  }
+
   function voltar() {
       window.history.back();
   }
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-        if (!localStorage.getItem('sessionToken')) {
-            window.location.href = 'login.html';
-        }
-    });
-
-    function logoff() {
-        localStorage.removeItem('sessionToken');
-        window.location.href = 'login.html';
-    }
 </script>
-
-
-<script src="./script.js"></script>
-
 </body>
 </html>
