@@ -19,7 +19,7 @@ $(document).ready(function() {
                 setSessionToken(data.jwt);
                 console.log('Token de autenticação obtido com sucesso.');
                 if (username === 'admin' && password === 'admin123') {
-                    window.location.href = 'minhas-denuncias.html';
+                    window.location.href = 'listagem-de-denuncia.html';
                 } else {
                     window.location.href = 'pagina-usuario.html';
                 }

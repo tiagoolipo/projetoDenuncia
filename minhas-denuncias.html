@@ -59,16 +59,24 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="lista-denuncias.js"></script>
+
 <script>
   function voltar() {
       window.history.back();
   }
 
-  function logoff() {
-      
-      window.location.href = 'login.html'; 
-  }
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (!localStorage.getItem('sessionToken')) {
+            window.location.href = 'login.html';
+        }
+    });
+
+    function logoff() {
+        localStorage.removeItem('sessionToken');
+        window.location.href = 'login.html';
+    }
 </script>
+
 
 <script src="./script.js"></script>
 
