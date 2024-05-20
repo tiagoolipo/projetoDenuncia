@@ -35,6 +35,7 @@ CREATE TABLE tb_reports (
   response TEXT,
   description TEXT NOT NULL,
   date_of_occurrence DATE,
+  anonymous BOOLEAN,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES tb_users(user_id),

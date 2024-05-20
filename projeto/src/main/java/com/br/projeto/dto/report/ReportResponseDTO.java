@@ -23,6 +23,7 @@ public class ReportResponseDTO implements Serializable {
     private String status;
     private String description;
     private String response;
+    private Boolean anonymous;
     private LocalDate dateOfOccurrence;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

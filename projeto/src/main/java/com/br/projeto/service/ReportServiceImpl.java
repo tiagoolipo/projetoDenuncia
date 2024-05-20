@@ -1,6 +1,7 @@
 package com.br.projeto.service;
 
 import com.br.projeto.dto.report.ReportRequestDTO;
+import com.br.projeto.dto.report.ReportUpdateItRequestDTO;
 import com.br.projeto.dto.report.ReportUpdateRequestDTO;
 import com.br.projeto.entity.Report;
 import com.br.projeto.entity.user.User;
@@ -82,6 +83,16 @@ public class ReportServiceImpl implements ReportService {
         report.setResponse(reportUpdateRequestDTO.getResponse());
         report.setStatus("Respondido");
         report.setManager(user);
+        return updateReport(report);
+    }
+
+    public Report updateReport(ReportUpdateItRequestDTO reportUpdateRequestDTO, Long id) {
+        Report report = this.getReportById(id);
+
+        report.setDescription(reportUpdateRequestDTO.getDescription());
+        report.setAnonymous(reportUpdateRequestDTO.getAnonymous());
+        report.setDateOfOccurrence(reportUpdateRequestDTO.getDateOfOccurrence());
+
         return updateReport(report);
     }
 

@@ -2,6 +2,7 @@ package com.br.projeto.controller;
 
 import com.br.projeto.dto.report.ReportRequestDTO;
 import com.br.projeto.dto.report.ReportResponseDTO;
+import com.br.projeto.dto.report.ReportUpdateItRequestDTO;
 import com.br.projeto.dto.report.ReportUpdateRequestDTO;
 import com.br.projeto.entity.Report;
 import com.br.projeto.service.ReportServiceImpl;
@@ -63,6 +64,13 @@ public class ReportController {
         Report createdReport = reportService.createReport(reportRequestDTO);
         ReportResponseDTO response = mapperUtils.map(createdReport, ReportResponseDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("/{id}/update")
+    public ResponseEntity<ReportResponseDTO> updateReport(@RequestBody ReportUpdateItRequestDTO reportUpdateItRequestDTO, @PathVariable Long id) {
+        Report createdReport = reportService.updateReport(reportUpdateItRequestDTO, id);
+        ReportResponseDTO response = mapperUtils.map(createdReport, ReportResponseDTO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PutMapping("/{id}")

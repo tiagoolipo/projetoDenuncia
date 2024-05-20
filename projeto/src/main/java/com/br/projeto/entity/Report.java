@@ -27,6 +27,7 @@ public class Report {
     private String description;
     private String response;
     private LocalDate dateOfOccurrence;
+    private Boolean anonymous;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
