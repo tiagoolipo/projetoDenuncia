@@ -1,6 +1,6 @@
 
 body {
-    background-image: url(/img/dnc.jpg);
+    background-image: url("img/dnc.jpg");
     background-repeat: no-repeat, no-repeat;
     background-size: 100%; 
     background-position: top left; 
@@ -10,7 +10,6 @@ body {
     height: 100vh;
     margin: 0;
 }
-
 
 .login-container {
     margin-left: 40%;
@@ -53,4 +52,18 @@ body {
 
 .login-form button:hover {
     background-color: #0056b3;
+}
+
+.cadastro {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: blue;
+    transition: color 0.3s, font-size 0.3s;
+    margin-top: 5%;
+}
+
+.cadastro:hover {
+    color: navy;
+    font-size: 18px; /* Cresce 1px ao passar o mouse */
 }

@@ -7,13 +7,12 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ReportRequestDTO implements Serializable {
+@AllArgsConstructor
+public class ReportUpdateItRequestDTO implements Serializable {
 
     private String description;
     private LocalDate dateOfOccurrence;

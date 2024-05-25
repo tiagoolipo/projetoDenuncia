@@ -2,6 +2,7 @@ package com.br.projeto.controller;
 
 import com.br.projeto.dto.report.ReportRequestDTO;
 import com.br.projeto.dto.report.ReportResponseDTO;
+import com.br.projeto.dto.report.ReportUpdateItRequestDTO;
 import com.br.projeto.dto.report.ReportUpdateRequestDTO;
 import com.br.projeto.entity.Report;
 import com.br.projeto.service.ReportServiceImpl;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -62,6 +65,13 @@ public class ReportController {
         ReportResponseDTO response = mapperUtils.map(createdReport, ReportResponseDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @PutMapping("/{id}/update")
+    public ResponseEntity<ReportResponseDTO> updateReport(@RequestBody ReportUpdateItRequestDTO reportUpdateItRequestDTO, @PathVariable Long id) {
+        Report createdReport = reportService.updateReport(reportUpdateItRequestDTO, id);
+        ReportResponseDTO response = mapperUtils.map(createdReport, ReportResponseDTO.class);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ReportResponseDTO> setReportResponse(@RequestBody ReportUpdateRequestDTO reportUpdateRequestDTO, @PathVariable Long id) {
@@ -70,3 +80,4 @@ public class ReportController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
+

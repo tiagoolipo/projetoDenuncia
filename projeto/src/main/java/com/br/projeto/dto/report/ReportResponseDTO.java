@@ -19,9 +19,11 @@ public class ReportResponseDTO implements Serializable {
 
     private Long reportId;
     private String protocolNumber;
+    private String office;
     private String status;
     private String description;
     private String response;
+    private Boolean anonymous;
     private LocalDate dateOfOccurrence;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

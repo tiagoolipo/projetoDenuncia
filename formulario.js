@@ -1,32 +1,45 @@
 $(document).ready(function() {
-    $('#formulario').submit(function(e) {
-        e.preventDefault();
+    function getSessionToken() {
+        return localStorage.getItem('sessionToken');
+    }
+    $('#formulario').submit(function(event) {
+        event.preventDefault();
+        var sessionToken = getSessionToken();
 
-        
-        var formData = new FormData(this);
+        if (!sessionToken) {
+            console.log('Token de sessão não encontrado.');
+            return;
+        }
+        var dateOfOccurrence = $('#dateOfOccurrence').val();
+        var description = $('#description').val();
+        var anonimo = $('#anonimoCheckbox').prop('checked');
+
+        if (!description) {
+            alert('Por favor, preencha a descrição da ocorrência.');
+            return;
+        }
+        var dados = {
+            dateOfOccurrence: dateOfOccurrence,
+            description: description,
+        };
 
         $.ajax({
-            url: '#',
+            url: 'http://localhost:8081/api/v1/reports',
             type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                alert('Dados enviados com sucesso!');
+            headers: {
+                'Authorization': sessionToken,
+                'Content-Type': 'application/json'
             },
-            error: function(xhr, status, error) {
-                console.error(error);
-                alert('Erro ao enviar os dados, tente novamente.');
+            data: JSON.stringify(dados),
+            success: function(response) {
+                console.log('Informações enviadas com sucesso:', response);
+                alert('Informações enviadas com sucesso!');
+                window.location.href = 'minhas-denuncias.html';
+            },
+            error: function(err) {
+                console.error('Erro ao enviar informações:', err);
+                alert('Erro ao enviar informações. Por favor, tente novamente.');
             }
         });
-    });
-
-    
-    $('#anonimoCheckbox').change(function() {
-        if ($(this).is(':checked')) {
-            $('#nome, #funcao').prop('disabled', true);
-        } else {
-            $('#nome, #funcao').prop('disabled', false);
-        }
     });
 });
